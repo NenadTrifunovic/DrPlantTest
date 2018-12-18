@@ -24,10 +24,17 @@ function cameraStart() {
 cameraTrigger.onclick = function() {
     cameraSensor.width = cameraView.videoWidth;
     cameraSensor.height = cameraView.videoHeight;
-    cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
+    var data = cameraSensor.getContext("2d");
+    var imageData = data.getImageData(0,0,cameraView.videoWidth,cameraView.videoHeight);
+    console.log(imageData.data);
+    data.drawImage(cameraView, 0, 0);
     cameraOutput.src = cameraSensor.toDataURL("image/webp");
     cameraOutput.classList.add("taken");
 };
 
 // Start the video stream when the window loads
 window.addEventListener("load", cameraStart, false);
+
+function pixelManipulation() {
+    // body...
+}
